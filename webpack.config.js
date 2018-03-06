@@ -9,10 +9,14 @@ const config = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'app.js'
     },
-    plugins: [new HtmlWebpackPlugin({
+    plugins: [
+    new HtmlWebpackPlugin({
         template: './src/index.html',
         favicon: './favicon.ico'
-    })],
+    }),
+     // 独立css文件
+    new ExtractTextPlugin("css/[name].css"),
+    ],
     module: {
         rules: [
             {
@@ -31,6 +35,14 @@ const config = {
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
                     use: "css-loader"
+                })
+            },
+              // sass文件的处理
+            {
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'sass-loader']
                 })
             },
         ]

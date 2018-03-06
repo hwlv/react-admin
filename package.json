@@ -6,9 +6,9 @@
   "author": "hwlv <3025947168@qq.com>",
   "license": "MIT",
   "scripts": {
-    "dev"       : "node_modules/.bin/webpack-dev-server",
-    "dist"      : "WEBPACK_ENV=online node_modules/.bin/webpack -p",
-    "dist_win"  : "set WEBPACK_ENV=online&& node_modules/.bin/webpack -p"
+    "dev": "node_modules/.bin/webpack-dev-server",
+    "dist": "WEBPACK_ENV=online node_modules/.bin/webpack -p",
+    "dist_win": "set WEBPACK_ENV=online&& node_modules/.bin/webpack -p"
   },
   "devDependencies": {
     "babel-core": "6.26.0",
@@ -19,7 +19,7 @@
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.6",
     "html-webpack-plugin": "2.30.1",
-    "node-sass": "4.7.2",
+    "node-sass": "^4.7.2",
     "sass-loader": "6.0.6",
     "style-loader": "0.19.1",
     "url-loader": "0.6.2",
