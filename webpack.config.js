@@ -19,6 +19,7 @@ const config = {
     ],
     module: {
         rules: [
+            // react(jsx)语法的处理
             {
                 test: /\.(js|jsx)$/,
                 exclude: /(node_modules|bower_components)/,
@@ -45,6 +46,32 @@ const config = {
                     use: ['css-loader', 'sass-loader']
                 })
             },
+            // 图片的配置
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8192,
+                            name: 'resource/[name].[ext]'
+                        }
+                    }
+                ]
+            },
+            // 字体图标的配置
+            {
+                test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8192,
+                            name: 'resource/[name].[ext]'
+                        }
+                    }
+                ]
+            }
         ]
     }
 };
