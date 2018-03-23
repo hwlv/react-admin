@@ -1,98 +1,54 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-// import './app.css'
-import './index.scss'
-// ReactDOM.render(
-//     <h1>Hello, world!</h1>,
-//     document.getElementById('root')
-// );
-let name = 'jack';
-let flag = true;
-let names = ['jack', 'tom', 'lucy'];
-let jsx = (
-    <div>
-        {/*{变量}*/}
-        <p>i am {name}</p>
-        {/*{判断}*/}
-        {
-            flag ? <p>i am {name}</p> : <p>i am not {name}</p>
-        }
-        {/*{循环}*/}
-        {
-            names.map((name, index) =>
-                <p key={index}>hello i am {name}</p>
-            )
-        }
-    </div>
-);
+/*
+* @Author: Rosen
+* @Date:   2018-01-13 11:27:21
+* @Last Modified by:   Rosen
+* @Last Modified time: 2018-02-05 14:02:20
+*/  
 
-// 组件
-function Compenent() {
-    return <h1>i am rosen</h1>
-}
-class App extends React.Component {
+import React            from 'react';
+import ReactDOM         from 'react-dom';
+import { BrowserRouter as Router, Switch, Redirect, Route, Link } from 'react-router-dom'
+
+import Layout           from 'component/layout/index.jsx';
+// 页面
+import Home             from 'page/home/index.jsx';
+import ProductRouter    from 'page/product/router.jsx';
+import Login            from 'page/login/index.jsx';
+import OrderList        from 'page/order/index.jsx';
+import OrderDetail      from 'page/order/detail.jsx';
+import UserList         from 'page/user/index.jsx';
+import ErrorPage        from 'page/error/index.jsx';
+
+class App extends React.Component{
     render(){
-        return(
-            <div className="" >
-                <h1>app</h1>
-                <hr/>
-                <ES6Componet/>
-            </div>
+        let LayoutRouter = (
+            <Layout> 
+                <Switch>
+                    <Route exact path="/" component={Home}/>
+                    <Route path="/product" component={ProductRouter}/>
+                    <Route path="/product-category" component={ProductRouter}/>
+                    <Route path="/order/index" component={OrderList}/>
+                    <Route path="/order/detail/:orderNumber" component={OrderDetail}/>
+                    <Route path="/user/index" component={UserList}/>
+                    <Redirect exact from="/order" to="/order/index"/>
+                    <Redirect exact from="/user" to="/user/index"/>
+                    <Route component={ErrorPage}/>
+                </Switch>
+            </Layout>
+        );
+        return (
+            <Router>
+                <Switch>
+                    <Route path="/login" component={Login}/>
+                    <Route path="/" render={ props => LayoutRouter}/>
+                </Switch>
+            </Router>
         )
     }
 }
-class Title extends React.Component {
-    constructor(props){
-        super(props);
-    }
-    render(){
-        return(
-           <h1>{this.props.title}</h1>
-        )
-    }
-}
-class ES6Componet extends React.Component {
-    constructor(props){
-        super(props);
-        this.state={
-            name:'hwlv',
-            age:10
-        }
-        this.handleClick=this.handleClick.bind(this);
-    }
-    handleClick(){
-        this.setState({
-            age:this.state.age+1
-        })
-    }
-    handleClick2(){
-        this.setState({
-            age:this.state.age+1
-        })
-    }
-    onValueChange(e){
-        this.setState({
-            age:e.target.value
-        })
-    }
-    render() {
-        return(
-            <div>
-                <h1> i am  {this.state.name},i am {this.props.name}</h1>
-                <h1>{this.state.age}</h1>
-                <button onClick={this.handleClick}>改变age(这种事件绑定还要绑定this)</button>
-                <button onClick={(e)=>{
-                    this.handleClick2(e)
-                }}>改变age2(箭头函数)</button>
-                <input type="text" onChange={(e)=>{
-                    this.onValueChange(e)
-                }}/>
-            </div>
-        )
-    }
-}
+
 
 ReactDOM.render(
-    <App name="para"/>,
+    <App />,
     document.getElementById('app')
-)
+);
